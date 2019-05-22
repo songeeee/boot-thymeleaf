@@ -1,28 +1,49 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
-	<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-	<title>Insert title here</title>
+    <title>User List</title>
+	<th:block th:include="fragments/header"></th:block>
+	<script type="text/javascript" src="js/main.js"></script>
 </head>
+
 <body>
+
+<th:block th:include="fragments/nav"></th:block>
+
+<div class="container" style="min-height: 500px">
 <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">NAME</th>
       <th scope="col">COMPANY</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
 	<tr>
-		<th scope="row">1</td>
-		<td><span th:text="${name}"></span></td>
-		<td><span th:text="${company}"></span></td>
+		<form th:action="@{'/users/{id}'(id=${id})}" th:method="put">
+		<div th:object="${user}">
+		<th scope="row"><span th:text="${id}"></span></td>
+		<td><input type="text" name="name" th:field="*{name}"/></td>
+		<td><input type="text" name="company" th:field="*{company}"/></td>
+		<td><button type="submit" id="updateButton">update</button></td>
+		</div>
+		</form>
+		<td>
+		<form th:action="@{'/users/{id}'(id=${id})}" th:method="delete">
+			<input type="hidden" name="id" th:value="${id}"/>
+			<button type="submit" id="deleteButton">delete</button>
+		</form>
+		</td>
 	</tr>
   </tbody>
 </table>
+</div>
+
+<th:block th:include="fragments/footer"></th:block>
+
 </body>
 </html>

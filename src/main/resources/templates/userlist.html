@@ -1,28 +1,39 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
-	<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-	<title>Insert title here</title>
+    <title>User List</title>
+	<th:block th:include="fragments/header"></th:block>
+	<script type="text/javascript" src="js/main.js"></script>
 </head>
+
 <body>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">NAME</th>
-      <th scope="col">COMPANY</th>
-    </tr>
-  </thead>
-  <tbody>
-	<tr th:each="user : ${users}">
-		<th scope="row"><span th:text="${user.id}"></span></td>
-		<td><span th:text="${user.name}"></span></td>
-		<td><span th:text="${user.company}"></span></td>
-	</tr>
-  </tbody>
-</table>
+
+<th:block th:include="fragments/nav"></th:block>
+
+<div class="container" style="min-height: 500px">
+
+	<table class="table">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">ID</th>
+	      <th scope="col">NAME</th>
+	      <th scope="col">COMPANY</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		<tr th:each="user : ${users}">
+			<th scope="row">
+			<a th:href="@{/users/{id}(id=${user.id})}">
+			<span th:text="${user.id}"></span></a></td>
+			<td><span th:text="${user.name}"></span></td>
+			<td><span th:text="${user.company}"></span></td>
+		</tr>
+	  </tbody>
+	</table>
+</div>
+
+<th:block th:include="fragments/footer"></th:block>
+
 </body>
 </html>
