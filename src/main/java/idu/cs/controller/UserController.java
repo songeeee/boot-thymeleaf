@@ -71,6 +71,19 @@ public class UserController {
 		model.addAttribute("users", userRepo.findAll());
 		return "redirect:/users";
 	}
+	@GetMapping("/user-update-form")
+	public String getUpdateForm( Model model) {
+		return "update";
+	}
+	@PutMapping("/update-users/{id}")
+	public String updateUsers(@PathVariable(value = "id") Long userId, @Valid User userDetails, Model model) {
+		User user = userRepo.findById(userId).get();
+		user.setUserPw(userDetails.getUserPw());
+		user.setName(userDetails.getName());
+		user.setCompany(userDetails.getCompany());
+		userRepo.save(user);
+		return "redirect:/user-update-form";
+	}
 	@GetMapping("/users/{id}")
 	public String getUserById(@PathVariable(value = "id") Long userId, Model model)
 			throws ResourceNotFoundException {
