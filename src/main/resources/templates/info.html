@@ -86,8 +86,7 @@
 					<div class="col-lg-8 col-md-8">
 						<h3 class="mb-30">회원 정보 확인 및 수정</h3>
 						<form th:object="${user}" 
-							th:action="@{'/users/{id}'(id=${user.id})}" 
-								th:method="put">
+							th:action="@{'/users/{id}'(id=${user.id})}" th:method="put">
 							<!-- form field의 이름은 domain 객체의 field 이름과 같아야 함 -->
 							<div class="mt-10">
 								<input type="text" th:field="*{userId}" name="userId" placeholder="사용자 아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 아이디'" required="" class="single-input" ReadOnly>
